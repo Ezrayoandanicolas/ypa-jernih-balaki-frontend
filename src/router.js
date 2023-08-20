@@ -15,6 +15,7 @@ import MasterAbout from './components/guest/about/MasterAbout.vue'
 
 import MasterDashboard from './components/admin/dashboard/MasterDashboard.vue'
 import AdminMasterArticle from './components/admin/article/MasterArticle.vue'
+import AdminMasterProgram from './components/admin/program/MasterProgram.vue'
 
 // createApp.use(VueRouter);
 
@@ -206,6 +207,42 @@ const routes = [
       component: AdminMasterArticle,
       meta: {
         title: 'Read Article | YPA Jernih Balaki',
+        middleware: true,
+        navigation: 'auth',
+        enterAnimate : 'animate__animated animate__fadeIn animate__faster',
+        leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
+      }
+    },
+    {
+      path: '/admin/program',
+      name: 'AdminMasterProgram',
+      component: AdminMasterProgram,
+      meta: {
+        title: 'Program | YPA Jernih Balaki',
+        middleware: true,
+        navigation: 'auth',
+        enterAnimate : 'animate__animated animate__fadeIn animate__faster',
+        leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
+      }
+    },
+    {
+      path: '/admin/program/:actions',
+      name: 'MasterProgramActions',
+      component: AdminMasterProgram,
+      meta: {
+        title: 'Manage Program | YPA Jernih Balaki',
+        middleware: true,
+        navigation: 'auth',
+        enterAnimate : 'animate__animated animate__fadeIn animate__faster',
+        leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
+      }
+    },
+    {
+      path: '/admin/program/read/:slug',
+      name: 'MasterProgramReads',
+      component: AdminMasterProgram,
+      meta: {
+        title: 'Read Program | YPA Jernih Balaki',
         middleware: true,
         navigation: 'auth',
         enterAnimate : 'animate__animated animate__fadeIn animate__faster',
