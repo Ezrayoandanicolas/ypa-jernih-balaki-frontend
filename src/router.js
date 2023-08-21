@@ -261,7 +261,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.middleware) {
     // If UnAuthentication Redirect to Login
     store.dispatch('checkAuth').then(() => {
-        next();
+        // next();
       }).catch(() => {
         // router.push({name: 'LoginPage'})
         return window.location.href = '/login';
