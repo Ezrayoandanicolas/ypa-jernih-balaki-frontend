@@ -30,28 +30,34 @@ export default {
             let reader = new FileReader
             reader.onload = e => {
 
-                // const data = new FormData();
-                //     data.append('imageUpload', this.uploadImage.imageFile);
+                const data = new FormData();
+                    data.append('imageUpload', this.uploadImage.imageFile);
 
-                // this.$store.dispatch('updateLogo', query).then(() => {
+                const query = {
+                    data: data,
+                }
+
+                this.$store.dispatch('storeImage', query).then((res) => {
                     this.uploadImage.imagePreviewUrl = e.target.result
                     this.uploadImage.imagePreviewProcess = true
-                //     this.$swal.fire({
-                //         text: 'Berhasil Update Logo Mini!',
-                //         icon: 'success',
-                //         position: 'bottom-right',
-                //         showConfirmButton: false,
-                //         timer: 1500
-                //     });
-                // }).catch(() => {
-                //     this.$swal.fire({
-                //         text: 'Gagal Update Logo Mini!',
-                //         icon: 'Error',
-                //         position: 'bottom-right',
-                //         showConfirmButton: false,
-                //         timer: 1500
-                //     });
-                // })
+                    this.uploadImage.id = res.data.id
+
+                    this.$swal.fire({
+                        text: 'Berhasil Update Logo Mini!',
+                        icon: 'success',
+                        position: 'bottom-right',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }).catch(() => {
+                    this.$swal.fire({
+                        text: 'Gagal Update Logo Mini!',
+                        icon: 'Error',
+                        position: 'bottom-right',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                })
 
             }
             reader.readAsDataURL(file[0])
