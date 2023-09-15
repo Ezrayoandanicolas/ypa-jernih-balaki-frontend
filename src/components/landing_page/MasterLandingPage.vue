@@ -3,7 +3,7 @@ import CarouselPage from "./CarouselPage.vue";
 import ArticlePage from "./ArticlePage.vue";
 import ProgramPage from "./ProgramPage.vue";
 import DonasiPage from "./DonasiPage.vue";
-import FasilitasPage from "./FasilitasPage.vue";
+// import FasilitasPage from "./FasilitasPage.vue";
 export default {
   created () {
   },
@@ -13,7 +13,7 @@ export default {
         ArticlePage,
         ProgramPage,
         DonasiPage,
-        FasilitasPage,
+        // FasilitasPage,
     }
     
 }
@@ -33,8 +33,8 @@ export default {
         <section id="donasi-page" class="relative">
             <donasi-page></donasi-page>
         </section>
-        <section id="fasilitas-page" class="relative">
+        <!-- <section id="fasilitas-page" class="relative">
             <fasilitas-page></fasilitas-page>
-        </section>
+        </section> -->
     </div>
 </template>

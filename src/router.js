@@ -16,6 +16,7 @@ import MasterAbout from './components/guest/about/MasterAbout.vue'
 import MasterDashboard from './components/admin/dashboard/MasterDashboard.vue'
 import AdminMasterArticle from './components/admin/article/MasterArticle.vue'
 import AdminMasterProgram from './components/admin/program/MasterProgram.vue'
+import AdminMasterDonasi from './components/admin/donasi/MasterDonasi.vue'
 
 // createApp.use(VueRouter);
 
@@ -265,6 +266,55 @@ const routes = [
       path: '/admin/program/update/:id',
       name: 'MasterProgramUpdates',
       component: AdminMasterProgram,
+      meta: {
+        title: 'Update Program | YPA Jernih Balaki',
+        middleware: true,
+        navigation: 'auth',
+        enterAnimate : 'animate__animated animate__fadeIn animate__faster',
+        leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
+      }
+    },
+    // Admin Donasi Page
+    {
+      path: '/admin/donasi',
+      name: 'AdminMasterDonasi',
+      component: AdminMasterDonasi,
+      meta: {
+        title: 'Donasi | YPA Jernih Balaki',
+        middleware: true,
+        navigation: 'auth',
+        enterAnimate : 'animate__animated animate__fadeIn animate__faster',
+        leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
+      }
+    },
+    {
+      path: '/admin/donasi/:actions',
+      name: 'MasterDonasiActions',
+      component: AdminMasterDonasi,
+      meta: {
+        title: 'Manage Donasi | YPA Jernih Balaki',
+        middleware: true,
+        navigation: 'auth',
+        enterAnimate : 'animate__animated animate__fadeIn animate__faster',
+        leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
+      }
+    },
+    {
+      path: '/admin/donasi/read/:slug',
+      name: 'MasterDonasiReads',
+      component: AdminMasterDonasi,
+      meta: {
+        title: 'Read Donasi | YPA Jernih Balaki',
+        middleware: true,
+        navigation: 'auth',
+        enterAnimate : 'animate__animated animate__fadeIn animate__faster',
+        leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
+      }
+    },
+    {
+      path: '/admin/donasi/update/:id',
+      name: 'MasterDonasiUpdates',
+      component: AdminMasterDonasi,
       meta: {
         title: 'Update Program | YPA Jernih Balaki',
         middleware: true,

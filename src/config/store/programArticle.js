@@ -1,7 +1,7 @@
 
 import axios from '@/config/axios.js'
 
-const users = {
+const storeProgramArticle = {
     state: {
         AReadProgram: null,
         ARetrievePrograms: null,
@@ -91,4 +91,4 @@ const users = {
     }
 };
 
-export default users
+export default storeProgramArticle
