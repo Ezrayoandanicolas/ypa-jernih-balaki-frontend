@@ -39,9 +39,14 @@ export default {
                 <h2 class="my-6 text-2xl font-semibold text-gray-700 animate__animated animate__fadeIn">
                     {{ title }}
                 </h2>
-                <router-link v-if="this.$route.name == 'AdminMasterArticle'" to="/admin/article/create">
-                    <button class="rounded-lg bg-blue-500 text-white px-5 py-2">New Article</button>
-                </router-link>
+                <div class="button">
+                    <router-link v-if="this.$route.name == 'AdminMasterArticle'" to="/admin/article/create">
+                        <button class="rounded-lg bg-blue-500 text-white px-5 py-2">New Article</button>
+                    </router-link>
+                    <router-link v-if="this.$route.name != 'AdminMasterArticle'" to="/admin/article">
+                        <button class="rounded-lg bg-blue-500 text-white px-5 py-2 ml-2">Back To Article</button>
+                    </router-link>
+                </div>
             </div>
             <hr />
             <transition enter-active-class="animate__animated animate__fadeIn animate__faster" leave-active-class="animate__animated animate__fadeOut animate__faster" mode="out-in">

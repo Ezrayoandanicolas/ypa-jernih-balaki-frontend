@@ -21,6 +21,11 @@ const users = {
         setARetrieveArticles(state, payload) {
             state.ARetrieveArticles = payload.data
         },
+        deleteARetrieveArticles(state, payload) {
+            let index = state.ARetrieveArticles.findIndex(obj => obj.id == payload.data);
+            // state.products[index] = product;
+            state.ARetrieveArticles.splice(index, 1)
+        },
     },
     actions: {
         AReadArticle({ commit }, slug) {
@@ -58,6 +63,26 @@ const users = {
                 axios.get('v1/admin/retrieveEditArticle/'+id).then((res) => {
                     commit('setARetrieveArticles', res.data)
                     resolve(res.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
+        AUpdateArticles({ commit }, data) {
+            return new Promise((resolve, reject) => {
+                axios.post('v1/admin/updateArticle/'+data.id, data).then((res) => {
+                    commit('setARetrieveArticles', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
+        ADeleteArticles({ commit }, data) {
+            return new Promise((resolve, reject) => {
+                axios.delete('v1/admin/destroyArticle/'+data).then((res) => {
+                    // console.log(res.data)
+                    commit('deleteARetrieveArticles', res.data)
                 }).catch((err) => {
                     reject(err)
                 })

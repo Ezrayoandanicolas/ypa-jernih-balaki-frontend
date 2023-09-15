@@ -62,7 +62,34 @@ export default {
     methods: {
         ...mapActions({
             ARetrieveArticles: 'ARetrieveArticles',
-        })
+        }),
+        deleteArticle(data) {
+            this.$swal.fire({
+                title: 'Are you sure? ',
+                text: "Delete Article "+data.title+"?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$store.dispatch('ADeleteArticles', data.id).then(() => {
+                        this.$swal.fire(
+                            'Deleted!',
+                            'Your article has been deleted.',
+                            'success'
+                        )
+                    }).catch(() => {
+                        this.$swal.fire(
+                            'Error!',
+                            'Our article failed to delete.',
+                            'error'
+                        )
+                    })
+                }
+            })
+        }
     }
 }
 </script>
@@ -105,7 +132,7 @@ export default {
                                     <PencilSquareIcon class="w-6 h-6 text-blue-500"/>
                                 </router-link>
                             </div>
-                            <div class="delete"><TrashIcon class="w-6 h-6 text-red-500"/></div>
+                            <div @click="deleteArticle(item)" class="delete"><TrashIcon class="w-6 h-6 text-red-500"/></div>
                         </div>
                     </div>
                 </div>

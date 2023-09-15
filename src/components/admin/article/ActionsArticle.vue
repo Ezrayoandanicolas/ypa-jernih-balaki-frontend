@@ -14,11 +14,13 @@ export default {
             },
             uploadImage: {
                 id: null,
+                content_id: '',
                 imagePreviewUrl: null,
                 imageFile: '',
                 imagePreviewProcess: false,
             },
             Article: {
+                id: '',
                 title: '',
                 slug: '',
                 article: '',
@@ -26,7 +28,8 @@ export default {
                 image_id: '',
                 category_id: '',
                 visibility: '',
-            }
+            },
+            updateArticleButton: false
 
         }
     },
@@ -35,6 +38,7 @@ export default {
             // console.log(this.$route.params.id)
             await this.RetrieveEditArticle(this.$route.params.id).then((res) => {
                 console.log('Berhasil Ambil Data Article')
+                this.Article.id = res.data.id
                 this.Article.title = res.data.title
                 this.Article.slug = res.data.slug
                 this.Article.article = res.data.article
@@ -44,9 +48,11 @@ export default {
                 this.Article.visibility = res.data.visibility
 
                 this.uploadImage.imagePreviewProcess = true
+                this.uploadImage.content_id = res.data.images.content_id
                 this.uploadImage.imagePreviewUrl = res.data.images.imageUrl
                 this.uploadImage.id = res.data.images.id
 
+                this.updateArticleButton = true
             }).catch(() => {
                 console.log('Error Mengambil Data Article')
             })
@@ -82,6 +88,8 @@ export default {
             reader.onload = e => {
 
                 const data = new FormData();
+                    data.append('id', this.uploadImage.id);
+                    data.append('content_id', this.uploadImage.content_id);
                     data.append('imageUpload', this.uploadImage.imageFile);
 
                 const query = {
@@ -95,7 +103,7 @@ export default {
                     this.Article.image_id = res.data.id
 
                     this.$swal.fire({
-                        text: 'Berhasil Update Logo Mini!',
+                        text: 'Berhasil Update Thumbnail!',
                         icon: 'success',
                         position: 'bottom-right',
                         showConfirmButton: false,
@@ -103,7 +111,7 @@ export default {
                     });
                 }).catch(() => {
                     this.$swal.fire({
-                        text: 'Gagal Update Logo Mini!',
+                        text: 'Gagal Update Thumbnail!',
                         icon: 'Error',
                         position: 'bottom-right',
                         showConfirmButton: false,
@@ -132,6 +140,27 @@ export default {
             }).catch(() => {
                 this.$swal.fire({
                     text: 'Gagal Tambah Article!',
+                    icon: 'Error',
+                    position: 'bottom-right',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+        },
+        updateArticle() {
+            this.Article.visibility = 1
+            this.$store.dispatch('AUpdateArticles', this.Article).then(() => {
+                this.$swal.fire({
+                    text: 'Berhasil Update Article!',
+                    icon: 'success',
+                    position: 'bottom-right',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                return window.location.href = '/admin/article'
+            }).catch(() => {
+                this.$swal.fire({
+                    text: 'Gagal Update Article!',
                     icon: 'Error',
                     position: 'bottom-right',
                     showConfirmButton: false,
@@ -213,9 +242,15 @@ export default {
                     </div>
                 </div>
             </form>
-            <div class="mt-5 w-full flex justify-end">
+            <div v-if="!updateArticleButton" class="mt-5 w-full flex justify-end">
                 <button @click="saveArticle(0)" class="bg-red-500 text-white rounded-lg py-2 px-4 mr-5">Draft</button>
                 <button @click="saveArticle(1)" class="bg-blue-500 text-white rounded-lg py-2 px-4">Publish</button>
+            </div>
+            <div v-else class="mt-5 w-full flex justify-end">
+                <router-link :to="{ name: 'AdminMasterArticle' }">
+                    <button class="bg-red-500 text-white rounded-lg py-2 px-4 mr-5">Cancel</button>
+                </router-link>
+                <button @click="updateArticle()" class="bg-blue-500 text-white rounded-lg py-2 px-4">Update & Publish</button>
             </div>
 
         </div>
