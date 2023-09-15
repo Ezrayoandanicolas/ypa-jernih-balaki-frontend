@@ -70,7 +70,7 @@ const users = {
         },
         AUpdatePrograms({ commit }, data) {
             return new Promise((resolve, reject) => {
-                axios.post('v1/admin/updateProgram/'+data.id, data).then((res) => {
+                axios.post('v1/admin/updateProgramArticle/'+data.id, data).then((res) => {
                     commit('setARetrievePrograms', res.data)
                     resolve(res.data)
                 }).catch((err) => {
@@ -80,7 +80,7 @@ const users = {
         },
         ADeletePrograms({ commit }, data) {
             return new Promise((resolve, reject) => {
-                axios.delete('v1/admin/destroyProgram/'+data).then((res) => {
+                axios.delete('v1/admin/destroyProgramArticle/'+data).then((res) => {
                     // console.log(res.data)
                     commit('deleteARetrievePrograms', res.data)
                 }).catch((err) => {
