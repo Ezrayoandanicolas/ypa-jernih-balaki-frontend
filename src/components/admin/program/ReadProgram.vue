@@ -53,7 +53,7 @@ export default {
         <div v-else class="container mx-auto w-full md:w-2/3 animate__animated animate__fadeIn">
             <div class="thumbnail m-5">
                 <div class="image-thumbnail">
-                    <img class="object-cover w-full h-[250px] md:h-[500px] shadow-md rounded-lg" src="http://127.0.0.1:8000/slide/images/foto-1.jpg" alt="thumbnail">
+                    <img class="object-cover w-full h-[250px] md:h-[500px] shadow-md rounded-lg" :src="Program.images.imageUrl" alt="thumbnail">
                 </div>
             </div>
             <div class="detail-program">
@@ -61,10 +61,7 @@ export default {
                 <h3 id="date-program" class="font-normal text-right px-5 pt-5 text-md lg:text-lg">{{ formateDateProgram(Program.created_at) }}</h3>
             </div>
             <div class="content px-5 pt-5 text-left text-md leading-7">
-                    <h3 class="font-bold text-lg">{{ Program.title }}</h3>
-                    <p>
-                        {{ Program.description }}
-                    </p>
+                    <p v-html="Program.article"></p>
             </div>
         </div>
     </div>

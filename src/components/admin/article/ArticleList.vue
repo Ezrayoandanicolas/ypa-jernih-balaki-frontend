@@ -46,18 +46,18 @@ export default {
     async mounted() {
         try {
             await this.ARetrieveArticles().then((res) => {
-                this.Articles = res.data
+                if (res.data.length == 0) {
+                    this.Articles = null
+                } else {
+                    this.Articles = res.data
+                }
+                
             }).catch(() => {
                 console.log('Error Ges')
             })
         } catch (err) {
             console.log(err)
         }
-    },
-    computed: {
-        // ...mapGetters({
-        //     Articles: 'getARetrieveArticles',
-        // })
     },
     methods: {
         ...mapActions({
@@ -73,22 +73,26 @@ export default {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
-                if (result.isConfirmed) {
-                    this.$store.dispatch('ADeleteArticles', data.id).then(() => {
-                        this.$swal.fire(
-                            'Deleted!',
-                            'Your article has been deleted.',
-                            'success'
-                        )
-                    }).catch(() => {
-                        this.$swal.fire(
-                            'Error!',
-                            'Our article failed to delete.',
-                            'error'
-                        )
-                    })
-                }
-            })
+                    if (result.isConfirmed) {
+                        this.$store.dispatch('ADeleteArticles', data.id).then(() => {
+                            this.$swal.fire({
+                                text: 'Berhasil Delete Article!',
+                                icon: 'success',
+                                position: 'bottom-right',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }).catch(() => {
+                            this.$swal.fire({
+                                text: 'Gagal Delete Article!',
+                                icon: 'Error',
+                                position: 'bottom-right',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        })
+                    }
+                })
         }
     }
 }
@@ -123,7 +127,9 @@ export default {
                     <div class="flex flex-col p-4 leading-normal">
                         <router-link :to="'article/read/'+item.slug">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ item.title }}</h5>
-                            <h5 class="w-16 pl-1 mb-2 rounded-lg text-md text-slate-600 font-bold tracking-tight text-gray-900 bg-gray-200">{{ item.visibility == 1 ? 'Publish' : 'Draft' }}</h5>
+                            <button :class="item.visibility == 1 ? 'bg-blue-500' : 'bg-red-500'" class="py-1 px-2 mb-2 rounded-lg">
+                                <h5 class="text-md text-white font-bold tracking-tight text-gray-900">{{ item.visibility == 1 ? 'Publish' : 'Draft' }}</h5>
+                            </button>
                         </router-link>
                         <h3 class="text-md">{{ item.created_at }}</h3>
                         <div class="flex justify-start text-gray-700">

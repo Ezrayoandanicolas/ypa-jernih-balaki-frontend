@@ -39,15 +39,20 @@ export default {
                 <h2 class="my-6 text-2xl font-semibold text-gray-700 animate__animated animate__fadeIn">
                     {{ title }}
                 </h2>
-                <router-link v-if="this.$route.name == 'AdminMasterProgram'" to="/admin/program/create">
-                    <button class="rounded-lg bg-blue-500 text-white px-5 py-2">New Program</button>
-                </router-link>
+                <div class="button">
+                    <router-link v-if="this.$route.name == 'AdminMasterProgram'" to="/admin/program/create">
+                        <button class="rounded-lg bg-blue-500 text-white px-5 py-2">New Program</button>
+                    </router-link>
+                    <router-link v-if="this.$route.name != 'AdminMasterProgram'" to="/admin/program">
+                        <button class="rounded-lg bg-blue-500 text-white px-5 py-2 ml-2">Back To Program</button>
+                    </router-link>
+                </div>
             </div>
             <hr />
             <transition enter-active-class="animate__animated animate__fadeIn animate__faster" leave-active-class="animate__animated animate__fadeOut animate__faster" mode="out-in">
                 <component 
                 @TitleReadProgram="changeTitle($event)"
-                :is="dynamicComponentProgram(this.$route.params.actions ? this.$route.params.actions : this.$route.name == 'MasterProgramReads' ? 'read' : null)"
+                :is="dynamicComponentProgram(this.$route.params.actions ? this.$route.params.actions : this.$route.name == 'MasterProgramReads' ? 'read' : this.$route.name == 'MasterProgramUpdates' ? 'update' : null)"
                 ></component>
             </transition>
         </div>

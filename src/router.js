@@ -261,6 +261,18 @@ const routes = [
         leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
       }
     },
+    {
+      path: '/admin/program/update/:id',
+      name: 'MasterProgramUpdates',
+      component: AdminMasterProgram,
+      meta: {
+        title: 'Update Program | YPA Jernih Balaki',
+        middleware: true,
+        navigation: 'auth',
+        enterAnimate : 'animate__animated animate__fadeIn animate__faster',
+        leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
+      }
+    },
   ]
 
 const router = createRouter({

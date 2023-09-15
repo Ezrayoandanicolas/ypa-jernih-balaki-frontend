@@ -1,5 +1,5 @@
 <template>
-  <div id="main" class="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
+  <div id="main" :class="this.$route.meta.navigation ? 'bg-gray-200' : ''" class="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center">
       <transition
         enter-active-class="animate__animated animate__fadeIn"
       >

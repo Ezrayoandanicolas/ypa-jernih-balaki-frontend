@@ -50,7 +50,7 @@
 </script>
 
 <template>
-    <div class="admin-navigation bg-gray-200 h-full">
+    <div class="admin-navigation">
         <nav class="fixed top-0 z-50 w-full bg-red-500 border-b border-red-700">
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">

@@ -61,10 +61,7 @@ export default {
                 <h3 id="date-article" class="font-normal text-right px-5 pt-5 text-md lg:text-lg">{{ formateDateArticle(Article.created_at) }}</h3>
             </div>
             <div class="content px-5 pt-5 text-left text-md leading-7">
-                    <h3 class="font-bold text-lg">{{ Article.title }}</h3>
-                    <p>
-                        {{ Article.description }}
-                    </p>
+                    <p v-html="Article.article"></p>
             </div>
         </div>
     </div>
