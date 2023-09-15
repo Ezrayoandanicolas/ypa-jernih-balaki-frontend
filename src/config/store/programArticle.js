@@ -50,7 +50,7 @@ const users = {
         },
         AStorePrograms({ commit }, data) {
             return new Promise((resolve, reject) => {
-                axios.post('v1/admin/storeProgram', data).then((res) => {
+                axios.post('v1/admin/storeProgramArticle', data).then((res) => {
                     commit('setARetrievePrograms', res.data)
                     resolve(res.data)
                 }).catch((err) => {
@@ -60,7 +60,7 @@ const users = {
         },
         AEditPrograms({ commit }, id) {
             return new Promise((resolve, reject) => {
-                axios.get('v1/admin/retrieveEditProgram/'+id).then((res) => {
+                axios.get('v1/admin/retrieveEditProgramArticle/'+id).then((res) => {
                     commit('setARetrievePrograms', res.data)
                     resolve(res.data)
                 }).catch((err) => {
