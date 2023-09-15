@@ -80,7 +80,7 @@ export default {
     methods: {
         ...mapActions({
             RetrieveCategory: 'retrieveCategory',
-            RetrieveEditDonasi: 'AEditDonasis'
+            RetrieveEditDonasi: 'AEditDonasi'
         }),
 
         selectImage(event) {

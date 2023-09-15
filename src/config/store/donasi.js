@@ -71,6 +71,7 @@ const users = {
         AUpdateDonasi({ commit }, data) {
             return new Promise((resolve, reject) => {
                 axios.post('v1/admin/updateDonasi/'+data.id, data).then((res) => {
+                    console.log('hellow')
                     commit('setARetrieveDonasi', res.data)
                     resolve(res.data)
                 }).catch((err) => {
