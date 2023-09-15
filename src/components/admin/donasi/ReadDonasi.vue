@@ -50,15 +50,32 @@ export default {
                 </div>
             </div>
         </div>
-        <div v-else class="container mx-auto w-full md:w-2/3 animate__animated animate__fadeIn">
+        <div v-else class="container mx-auto w-full md:w-2/3">
             <div class="thumbnail m-5">
                 <div class="image-thumbnail">
                     <img class="object-cover w-full h-[250px] md:h-[500px] shadow-md rounded-lg" :src="Donasi.images.imageUrl" alt="thumbnail">
                 </div>
             </div>
-            <div class="detail-donasi">
-                <h1 id="title-donasi" class="font-bold px-5 pt-5 text-2xl lg:text-4xl">{{ Donasi.title }}</h1>
-                <h3 id="date-donasi" class="font-normal text-right px-5 pt-5 text-md lg:text-lg">{{ formateDateDonasi(Donasi.created_at) }}</h3>
+            <div class="detail-article">
+                <h1 id="title-article" class="font-bold px-5 pt-5 text-2xl lg:text-4xl">{{ Donasi.title }}</h1>
+                <h3 id="date-article" class="font-normal text-right px-5 pt-5 text-md lg:text-lg">{{ Donasi.date_start }}</h3>
+            </div>
+            <div class="progress-bar mt-5">
+                <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-gray-900">Target Donasi</span>
+                    <span class="text-sm font-medium text-gray-900">{{ 'Rp. '+Donasi.target_donasi }}</span>
+                </div>
+                <div class="w-full bg-red-200 rounded-full h-2.5 ">
+                    <div class="bg-blue-600 h-2.5 rounded-full" :style="'width: '+900000/Donasi.target_donasi*0.01"></div>
+                </div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-gray-900">Rp. 9.000.000 (Terkumpul)</span>
+                    <span class="text-sm font-medium text-gray-900">45%</span>
+                </div>
+            </div>
+            <div class="inline-flex justify-between mb-1 rounded-lg bg-red-500 text-white px-4 py-1">
+                <span class="text-sm font-medium">Batas Waktu : &nbsp;</span>
+                <span class="text-sm font-medium">{{ Donasi.date_end }}</span>
             </div>
             <div class="content px-5 pt-5 text-left text-md leading-7">
                     <p v-html="Donasi.article"></p>
