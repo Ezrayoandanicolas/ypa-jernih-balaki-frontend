@@ -27,6 +27,8 @@ export default {
                 description: '',
                 image_id: '',
                 target_donasi: '',
+                date_start: '',
+                date_end: '',
                 category_id: '',
                 visibility: '',
             },
@@ -44,6 +46,9 @@ export default {
                 this.Donasi.article = res.data.article
                 this.Donasi.description = res.data.description
                 this.Donasi.image_id = res.data.image_id
+                this.Donasi.target_donasi = res.data.target_donasi
+                this.Donasi.date_start = res.data.date_start
+                this.Donasi.date_end = res.data.date_end
                 this.Donasi.category_id = res.data.category_id
                 this.Donasi.visibility = res.data.visibility
 
@@ -128,7 +133,7 @@ export default {
         },
         saveDonasi(visible) {
             this.Donasi.visibility = visible
-            this.$store.dispatch('AStoreDonasis', this.Donasi).then(() => {
+            this.$store.dispatch('AStoreDonasi', this.Donasi).then(() => {
                 this.$swal.fire({
                     text: 'Berhasil Tambah Donasi!',
                     icon: 'success',
@@ -149,7 +154,7 @@ export default {
         },
         updateDonasi() {
             this.Donasi.visibility = 1
-            this.$store.dispatch('AUpdateDonasis', this.Donasi).then(() => {
+            this.$store.dispatch('AUpdateDonasi', this.Donasi).then(() => {
                 this.$swal.fire({
                     text: 'Berhasil Update Donasi!',
                     icon: 'success',
@@ -215,7 +220,7 @@ export default {
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="flex justify-between items-center uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                        <label class="flex justify-between items-center uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="donasi-category">
                             <div>Category</div>
                             <div>
                                 <button class="rounded-lg bg-blue-500 text-white px-4 py-2">
@@ -224,13 +229,35 @@ export default {
                             </div>
                         </label>
                         <div class="relative">
-                            <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" v-model="Donasi.category_id">
+                            <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="donasi-category" v-model="Donasi.category_id">
                                 <option v-for="(items, index) in Category" :key="index" :value="items.id">{{ items.name }}</option>
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                             </div>
                         </div>
+                    </div>
+                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                        <label class="flex justify-between items-center inset-x-0 h-8 uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="target-donasi">
+                            <div>Target Donasi</div>
+                        </label>
+                        <div class="relative">
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="target-donasi" type="number" v-model="Donasi.target_donasi" placeholder="Target Donasi">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="date-start">
+                        Date Start
+                    </label>
+                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="date-start" type="date" v-model="Donasi.date_start" placeholder="Date Start">
+                    </div>
+                    <div class="w-full md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="date-end">
+                            Date End
+                        </label>
+                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="date-end" type="date" v-model="Donasi.date_end" placeholder="Slug">
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2 mt-6">
