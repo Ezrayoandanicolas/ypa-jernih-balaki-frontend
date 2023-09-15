@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/solid';
 export default {
     name: 'Admin-Article-List',
@@ -36,7 +36,8 @@ export default {
                     date: '12 Agustus 2023',
                     imageUrl: 'http://127.0.0.1:8000/slide/images/foto-1.jpg',
                 },
-            ]
+            ],
+            Articles: null
         }
     },
     components: {
@@ -44,8 +45,8 @@ export default {
     },
     async mounted() {
         try {
-            await this.ARetrieveArticles().then(() => {
-                console.log('Berhasil Get')
+            await this.ARetrieveArticles().then((res) => {
+                this.Articles = res.data
             }).catch(() => {
                 console.log('Error Ges')
             })
@@ -54,9 +55,9 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({
-            Articles: 'getARetrieveArticles',
-        })
+        // ...mapGetters({
+        //     Articles: 'getARetrieveArticles',
+        // })
     },
     methods: {
         ...mapActions({
@@ -89,19 +90,25 @@ export default {
         <div v-else v-for="(item, index) in Articles" :key="index" class="content mt-5 animate__animated animate__fadeIn animate__faster">
 
             <div class="article-list">
-                <router-link :to="'article/read/'+item.slug" class="flex justify-between bg-gray-100 border border-gray-200 rounded-lg shadow-sm hover:shadow-lg flex-row w-full hover:bg-gray-100">
+                <div class="flex m-auto bg-gray-100 border border-gray-200 rounded-lg shadow-sm hover:shadow-lg flex-row w-2/3 hover:bg-gray-100">
                     <!-- <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" :src="item.imageUrl" alt=""> -->
-                    <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="http://127.0.0.1:8000/slide/images/foto-1.jpg" alt="">
-                    <div class="p-4 leading-normal">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ item.title }}</h5>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ item.description }}</p>
-                        <h3 class="text-md">{{ item.date }}</h3>
+                    <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" :src="item.images.imageUrl" alt="">
+                    <div class="flex flex-col p-4 leading-normal">
+                        <router-link :to="'article/read/'+item.slug">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ item.title }}</h5>
+                            <h5 class="w-16 pl-1 mb-2 rounded-lg text-md text-slate-600 font-bold tracking-tight text-gray-900 bg-gray-200">{{ item.visibility == 1 ? 'Publish' : 'Draft' }}</h5>
+                        </router-link>
+                        <h3 class="text-md">{{ item.created_at }}</h3>
+                        <div class="flex justify-start text-gray-700">
+                            <div class="edit">
+                                <router-link :to="'article/update/'+item.id">
+                                    <PencilSquareIcon class="w-6 h-6 text-blue-500"/>
+                                </router-link>
+                            </div>
+                            <div class="delete"><TrashIcon class="w-6 h-6 text-red-500"/></div>
+                        </div>
                     </div>
-                    <div class="flex flex-col justify-center text-gray-700">
-                        <div class="edit"><PencilSquareIcon class="w-8 h-8 text-blue-500"/></div>
-                        <div class="delete mt-2"><TrashIcon class="w-8 h-8 text-red-500"/></div>
-                    </div>
-                </router-link>
+                </div>
             </div>
         </div>
     </div>

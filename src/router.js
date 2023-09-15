@@ -214,6 +214,18 @@ const routes = [
       }
     },
     {
+      path: '/admin/article/update/:id',
+      name: 'MasterArticleUpdates',
+      component: AdminMasterArticle,
+      meta: {
+        title: 'Update Article | YPA Jernih Balaki',
+        middleware: true,
+        navigation: 'auth',
+        enterAnimate : 'animate__animated animate__fadeIn animate__faster',
+        leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
+      }
+    },
+    {
       path: '/admin/program',
       name: 'AdminMasterProgram',
       component: AdminMasterProgram,

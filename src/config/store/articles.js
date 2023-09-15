@@ -20,7 +20,7 @@ const users = {
         },
         setARetrieveArticles(state, payload) {
             state.ARetrieveArticles = payload.data
-        }
+        },
     },
     actions: {
         AReadArticle({ commit }, slug) {
@@ -36,6 +36,26 @@ const users = {
         ARetrieveArticles({ commit }) {
             return new Promise((resolve, reject) => {
                 axios.get('v1/admin/retrieveArticles').then((res) => {
+                    commit('setARetrieveArticles', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
+        AStoreArticles({ commit }, data) {
+            return new Promise((resolve, reject) => {
+                axios.post('v1/admin/storeArticle', data).then((res) => {
+                    commit('setARetrieveArticles', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
+        AEditArticles({ commit }, id) {
+            return new Promise((resolve, reject) => {
+                axios.get('v1/admin/retrieveEditArticle/'+id).then((res) => {
                     commit('setARetrieveArticles', res.data)
                     resolve(res.data)
                 }).catch((err) => {

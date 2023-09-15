@@ -53,7 +53,7 @@ export default {
         <div v-else class="container mx-auto w-full md:w-2/3 animate__animated animate__fadeIn">
             <div class="thumbnail m-5">
                 <div class="image-thumbnail">
-                    <img class="object-cover w-full h-[250px] md:h-[500px] shadow-md rounded-lg" src="http://127.0.0.1:8000/slide/images/foto-1.jpg" alt="thumbnail">
+                    <img class="object-cover w-full h-[250px] md:h-[500px] shadow-md rounded-lg" :src="Article.images.imageUrl" alt="thumbnail">
                 </div>
             </div>
             <div class="detail-article">

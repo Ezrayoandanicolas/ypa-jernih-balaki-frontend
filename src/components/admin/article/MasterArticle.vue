@@ -47,7 +47,7 @@ export default {
             <transition enter-active-class="animate__animated animate__fadeIn animate__faster" leave-active-class="animate__animated animate__fadeOut animate__faster" mode="out-in">
                 <component 
                 @TitleReadArticle="changeTitle($event)"
-                :is="dynamicComponentArticle(this.$route.params.actions ? this.$route.params.actions : this.$route.name == 'MasterArticleReads' ? 'read' : null)"
+                :is="dynamicComponentArticle(this.$route.params.actions ? this.$route.params.actions : this.$route.name == 'MasterArticleReads' ? 'read' : this.$route.name == 'MasterArticleUpdates' ? 'update' : null)"
                 ></component>
             </transition>
         </div>
