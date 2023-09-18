@@ -2,13 +2,14 @@
     import { computed } from 'vue'
     import { mapGetters, useStore } from 'vuex'
     // import { AcademicCapIcon } from '@heroicons/vue/24/solid'
-    import { HomeIcon, UsersIcon,WrenchIcon, ArrowLeftCircleIcon, NewspaperIcon, SquaresPlusIcon, HeartIcon } from '@heroicons/vue/24/solid'
+    import { HomeIcon, PhotoIcon, UsersIcon, WrenchIcon, ArrowLeftCircleIcon, NewspaperIcon, SquaresPlusIcon, HeartIcon } from '@heroicons/vue/24/solid'
     export default {
         name: 'Admin-Navigation',
         setup() {
             const store = useStore()
             const links = [
                 {'url': '/admin/dashboard', 'title': 'Dashboard', 'icons' : HomeIcon, 'auth': true, 'multiple': false},
+                {'url': '/admin/carousel', 'title': 'Carousel', 'icons' : PhotoIcon, 'auth': true, 'multiple': false},
                 {'url': '/admin/article', 'title': 'Article', 'icons' : NewspaperIcon, 'auth': true, 'multiple': false},
                 {'url': '/admin/program', 'title': 'Program', 'icons' : SquaresPlusIcon, 'auth': true, 'multiple': false},
                 {'url': '/admin/donasi', 'title': 'Donasi', 'icons' : HeartIcon, 'auth': true, 'multiple': false},
