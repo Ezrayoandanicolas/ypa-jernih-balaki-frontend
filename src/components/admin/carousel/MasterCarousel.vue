@@ -64,22 +64,18 @@ export default {
             reader.onload = e => {
 
                 const data = new FormData();
-                    data.append('id', this.uploadImage.id);
-                    data.append('content_id', this.uploadImage.content_id);
                     data.append('imageUpload', this.uploadImage.imageFile);
 
                 const query = {
                     data: data,
                 }
 
-                this.$store.dispatch('storeImage', query).then((res) => {
+                this.$store.dispatch('storeImageSlide', query).then(() => {
                     this.uploadImage.imagePreviewUrl = e.target.result
                     this.uploadImage.imagePreviewProcess = true
-                    this.uploadImage.id = res.data.id
-                    this.Donasi.image_id = res.data.id
 
                     this.$swal.fire({
-                        text: 'Berhasil Update Thumbnail!',
+                        text: 'Berhasil Update Slide!',
                         icon: 'success',
                         position: 'bottom-right',
                         showConfirmButton: false,
@@ -87,7 +83,7 @@ export default {
                     });
                 }).catch(() => {
                     this.$swal.fire({
-                        text: 'Gagal Update Thumbnail!',
+                        text: 'Gagal Update Slide!',
                         icon: 'Error',
                         position: 'bottom-right',
                         showConfirmButton: false,

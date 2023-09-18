@@ -13,6 +13,9 @@ const settings = {
     mutations: {
         setSlide(state, payload) {
             state.slide = payload.data
+        },
+        setNewSlide(state, payload) {
+            state.slide.unshift(payload.data.data)
         }
     },
     actions: {
@@ -25,7 +28,22 @@ const settings = {
                     reject(err)
                 })
             })
-        }
+        },
+        storeImageSlide({ commit }, data) {
+            return new Promise((resolve, reject) => {
+                axios.post('v1/admin/storeSlide', data.data, {
+                    Headers: { 
+                        "Content-Type": "multipart/form-data",
+                    },
+                }).then((res) => {
+                    commit('setNewSlide', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
+                    console.log('error')
+                    reject(err)
+                })
+            })
+        },
     }
 
 }
