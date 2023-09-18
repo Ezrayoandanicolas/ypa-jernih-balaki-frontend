@@ -43,7 +43,7 @@ export default {
                     <li v-for="(img, i) in images" :key="i" class="md:w-4 md:h-4 bg-gray-300 rounded-full cursor-pointer mx-2"></li>
                 </ol>
             </div> -->
-            <div class="carousel-inner relative overflow-hidden w-full h-[calc(100vh-73px)]">
+            <div class="carousel-inner relative overflow-hidden w-full h-[calc(100vh-73px)] sm:h-[calc(100%-73px)]">
                 <transition enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut" mode="out-in">
                     <img v-show="showImage" class="w-full bg-cover bg-no-repeat bg-fixed bg-center brightness-90" :src="img ? img : images[0]" alt="First slide" />
                 </transition>
