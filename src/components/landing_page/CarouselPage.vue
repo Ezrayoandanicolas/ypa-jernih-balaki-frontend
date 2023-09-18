@@ -1,17 +1,14 @@
 <script>
+import { mapActions } from "vuex";
+
 export default {
     name: 'Carousel-Page',
     data: () => ({
-        images: [
-            "http://127.0.0.1:8000/slide/images/foto-1.jpg",
-            "http://127.0.0.1:8000/slide/images/foto-2.jpg",
-            "http://127.0.0.1:8000/slide/images/foto-3.jpg",
-            "http://127.0.0.1:8000/slide/images/foto-4.jpg"
-        ],
+        images: [],
         showImage: true,
         img: '',
     }),
-    mounted() {
+    async mounted() {
         let i = 0;
         // get Default Slide Image
         setTimeout(() => {
@@ -31,6 +28,28 @@ export default {
             }, 500)
             i++;
         }, 10000);
+
+        try {
+            await this.RetrieveSlide().then((res) => {
+                if (res.data.length == 0) {
+                    this.images = null
+                } else {
+                    res.data.forEach(el => {
+                        this.images.push(el.value)
+                    });
+                }
+                
+            }).catch(() => {
+                console.log('Error Ges')
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    methods: {
+        ...mapActions({
+            RetrieveSlide: 'retrieveSlide',
+        }),
     }
 }
 </script>
@@ -38,11 +57,6 @@ export default {
 <template>
     <div class="carousel-page">
         <div class="relative slide">
-            <!-- <div class="carousel-indicators absolute bottom-0 flex h-24 w-full justify-center items-center">
-                <ol class="z-50 flex w-4/12 justify-center">
-                    <li v-for="(img, i) in images" :key="i" class="md:w-4 md:h-4 bg-gray-300 rounded-full cursor-pointer mx-2"></li>
-                </ol>
-            </div> -->
             <div class="carousel-inner relative overflow-hidden w-full h-[calc(100vh-73px)] max-sm:h-[calc(100%-73px)]">
                 <transition enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut" mode="out-in">
                     <img v-show="showImage" class="w-full bg-cover bg-no-repeat bg-fixed bg-center brightness-90" :src="img ? img : images[0]" alt="First slide" />
