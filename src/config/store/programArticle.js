@@ -87,7 +87,19 @@ const storeProgramArticle = {
                     reject(err)
                 })
             })
-        }
+        },
+
+        // Guest Landing Page
+        ARetrieveProgramsGuest({ commit }) {
+            return new Promise((resolve, reject) => {
+                axios.get('v1/guest/retrieveProgramArticle').then((res) => {
+                    commit('setARetrievePrograms', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
     }
 };
 
