@@ -14,6 +14,7 @@ import MasterDonasi from './components/guest/donasi/MasterDonasi.vue'
 import MasterAbout from './components/guest/about/MasterAbout.vue'
 
 import MasterDashboard from './components/admin/dashboard/MasterDashboard.vue'
+import MasterCarousel from './components/admin/carousel/MasterCarousel.vue'
 import AdminMasterArticle from './components/admin/article/MasterArticle.vue'
 import AdminMasterProgram from './components/admin/program/MasterProgram.vue'
 import AdminMasterDonasi from './components/admin/donasi/MasterDonasi.vue'
@@ -172,6 +173,18 @@ const routes = [
       component: MasterDashboard,
       meta: {
         title: 'Dashboard Page | YPA Jernih Balaki',
+        middleware: true,
+        navigation: 'auth',
+        enterAnimate : 'animate__animated animate__fadeIn animate__faster',
+        leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
+      }
+    },
+    {
+      path: '/admin/carousel',
+      name: 'AdminMasterCarousel',
+      component: MasterCarousel,
+      meta: {
+        title: 'Carousel Page | YPA Jernih Balaki',
         middleware: true,
         navigation: 'auth',
         enterAnimate : 'animate__animated animate__fadeIn animate__faster',

@@ -8,6 +8,7 @@ import Articles from '@/config/store/articles.js'
 import ProgramArticle from '@/config/store/programArticle.js'
 import DonasiArticle from '@/config/store/donasi.js'
 import Images from '@/config/store/images.js'
+import Settings from '@/config/store/setting.js'
 
 const store = createStore({
     modules: {
@@ -19,6 +20,7 @@ const store = createStore({
         DonasiArticle,
         Category,
         Images,
+        Settings,
     }
 })
 
