@@ -1,32 +1,51 @@
 <script>
+import moment from "moment";
+import { mapActions, mapGetters } from "vuex";
+
 export default {
     name: 'Read-Articles',
+    async mounted() {
+        try {
+            await this.AReadArticleGuest(this.$route.params.article).then(() => {
+                this.$emit('TitleReadArticle', this.Article.title)
+            }).catch(() => {
+                console.log('Error Ges')
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    computed: {
+        ...mapGetters({
+            Article: 'getAReadArticle',
+        })
+    },
+    methods: {
+        ...mapActions({
+            AReadArticleGuest: 'AReadArticleGuest',
+        }),
+        formateDateArticle(data) {
+            return moment(data).format('LL')
+        }
+    }
 }
 </script>
 
 <template>
-    <div class="read-articles relative">
+    <div v-if="Article != null" class="read-articles relative">
         <div class="container mx-auto w-full md:w-2/3">
             <div class="thumbnail m-5">
                 <div class="image-thumbnail">
-                    <img class="object-cover w-full h-[250px] md:h-[500px] shadow-md rounded-lg" src="http://127.0.0.1:8000/slide/images/foto-1.jpg" alt="thumbnail">
+                    <img class="object-cover w-full h-full shadow-md rounded-lg" :src="Article.images.imageUrl" alt="thumbnail">
                 </div>
             </div>
             <div class="detail-article">
-                <h1 id="title-article" class="font-bold px-5 pt-5 text-2xl lg:text-4xl">Berbagi Kebahagiaan Bersama Brand Terkemuka</h1>
-                <h3 id="date-article" class="font-normal text-right px-5 pt-5 text-md lg:text-lg">12 Agustus 2023</h3>
+                <h1 id="title-article" class="font-bold px-5 pt-5 text-2xl lg:text-4xl">{{ Article.title }}</h1>
+                <h3 id="date-article" class="font-normal text-right px-5 pt-5 text-md lg:text-lg">{{ formateDateArticle(Article.created_at) }}</h3>
             </div>
             <div class="content px-5 pt-5 text-left text-md leading-7">
-                    <h3 class="font-bold text-lg">Lorem Ipsum</h3>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, tempore minus provident in ea illum ipsa eum exercitationem culpa perspiciatis modi! Maxime, aliquid harum ab quo et consequatur quibusdam sequi!.<br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatum eveniet rem autem delectus debitis amet vero quibusdam culpa, asperiores harum quisquam vitae magni sint vel nihil. Quaerat, odio nostrum?.<br/><br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit neque assumenda deserunt, labore dolores nulla reprehenderit quo molestiae libero. Odio accusamus rerum quam at incidunt. Maxime accusantium quo cupiditate quibusdam? <br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, tempore minus provident in ea illum ipsa eum exercitationem culpa perspiciatis modi! Maxime, aliquid harum ab quo et consequatur quibusdam sequi!.<br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatum eveniet rem autem delectus debitis amet vero quibusdam culpa, asperiores harum quisquam vitae magni sint vel nihil. Quaerat, odio nostrum?.<br/><br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit neque assumenda deserunt, labore dolores nulla reprehenderit quo molestiae libero. Odio accusamus rerum quam at incidunt. Maxime accusantium quo cupiditate quibusdam? <br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, tempore minus provident in ea illum ipsa eum exercitationem culpa perspiciatis modi! Maxime, aliquid harum ab quo et consequatur quibusdam sequi!.<br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatum eveniet rem autem delectus debitis amet vero quibusdam culpa, asperiores harum quisquam vitae magni sint vel nihil. Quaerat, odio nostrum?.<br/><br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit neque assumenda deserunt, labore dolores nulla reprehenderit quo molestiae libero. Odio accusamus rerum quam at incidunt. Maxime accusantium quo cupiditate quibusdam?
+                    <h3 class="font-bold text-xl">{{ Article.title }}</h3>
+                    <p v-html="Article.article"></p>
             </div>
             <div class="social-media my-5 pl-5">
                 <h1 class="font-bold">Share to : </h1>

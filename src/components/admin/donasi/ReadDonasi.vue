@@ -25,6 +25,9 @@ export default {
         }),
         formateDateDonasi(data) {
             return moment(data).format('LL')
+        },
+        numberDecimal(data) {
+            return data.toFixed(0)
         }
     }
 }
@@ -66,11 +69,11 @@ export default {
                     <span class="text-sm font-medium text-gray-900">{{ 'Rp. '+Donasi.target_donasi }}</span>
                 </div>
                 <div class="w-full bg-red-200 rounded-full h-2.5 ">
-                    <div class="bg-blue-600 h-2.5 rounded-full" :style="'width: '+900000/Donasi.target_donasi*0.01"></div>
+                    <div class="bg-blue-600 h-2.5 rounded-full" :style="'width: '+980000/Donasi.target_donasi*100+'%'"></div>
                 </div>
                 <div class="flex justify-between mb-1">
-                    <span class="text-base font-medium text-gray-900">Rp. 9.000.000 (Terkumpul)</span>
-                    <span class="text-sm font-medium text-gray-900">45%</span>
+                    <span class="text-base font-medium text-gray-900">Rp. 90.000 (Terkumpul)</span>
+                    <span class="text-sm font-medium text-gray-900">{{ numberDecimal(980000/Donasi.target_donasi*100) }}</span>
                 </div>
             </div>
             <div class="inline-flex justify-between mb-1 rounded-lg bg-red-500 text-white px-4 py-1">

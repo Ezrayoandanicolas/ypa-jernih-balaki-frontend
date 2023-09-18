@@ -83,11 +83,35 @@ const users = {
                 axios.delete('v1/admin/destroyArticle/'+data).then((res) => {
                     // console.log(res.data)
                     commit('deleteARetrieveArticles', res.data)
+                    resolve(resolve)
                 }).catch((err) => {
                     reject(err)
                 })
             })
-        }
+        },
+
+        // Guest Landing Page
+        ARetrieveArticlesGuest({ commit }) {
+            return new Promise((resolve, reject) => {
+                axios.get('v1/guest/retrieveArticle').then((res) => {
+                    commit('setARetrieveArticles', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
+
+        AReadArticleGuest({ commit }, slug) {
+            return new Promise((resolve, reject) => {
+                axios.get('v1/guest/readArticle/' + slug).then((res) => {
+                    commit('setAReadArticle', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
     }
 };
 
