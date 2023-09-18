@@ -95,6 +95,37 @@ export default {
             reader.readAsDataURL(file[0])
             }
         },
+        destroySlide(data) {
+            this.$swal.fire({
+                title: 'Are you sure? ',
+                text: "Apakah kamu ingin menghapus Slide ini?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.$store.dispatch('deleteSlide', data).then(() => {
+                            this.$swal.fire({
+                                    text: 'Berhasil Delete Slide!',
+                                    icon: 'success',
+                                    position: 'bottom-right',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                        }).catch(() => {
+                            this.$swal.fire({
+                                    text: 'Gagal Delete Slide!',
+                                    icon: 'Error',
+                                    position: 'bottom-right',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                        })
+                    }
+                })
+        }
     },
     components: {
         PhotoIcon
@@ -161,7 +192,7 @@ export default {
 
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
             <div v-for="(items, index) in Slide" :key="index">
-                <img class="h-auto max-w-full rounded-lg" :src="items.value" alt="">
+                <img @click="destroySlide(items)" class="h-auto max-w-full rounded-lg" :src="items.value" alt="">
             </div>
         </div>
     </div>

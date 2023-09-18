@@ -16,7 +16,12 @@ const settings = {
         },
         setNewSlide(state, payload) {
             state.slide.unshift(payload.data.data)
-        }
+        },
+        deleteSlide(state, payload) {
+            let index = state.slide.findIndex(obj => obj.id == payload.data);
+            // state.products[index] = product;
+            state.slide.splice(index, 1)
+        },
     },
     actions: {
         retrieveSlide({ commit }) {
@@ -40,6 +45,16 @@ const settings = {
                     resolve(res.data)
                 }).catch((err) => {
                     console.log('error')
+                    reject(err)
+                })
+            })
+        },
+        deleteSlide({ commit }, data) {
+            return new Promise((resolve, reject) => {
+                axios.delete('v1/admin/destroySlide/'+data.id).then((res) => {
+                    commit('deleteSlide', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
                     reject(err)
                 })
             })
