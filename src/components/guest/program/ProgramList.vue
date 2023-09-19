@@ -54,8 +54,8 @@ export default {
                     <div class="group absolute rounded-lg hover:bg-opacity-25 hover:bg-gray-900 w-full h-full top-0 transition-all duration-300 ease-in-out">
                         <div class="absolute rounded-lg bottom-0 bg-opacity-95 bg-green-900 w-full h-[15%]">
                             <div class="grid grid-flow-col justify-stretch">
-                                <h1 class="text-white text-xs sm:text-sm md:text-xl lg:text-2xl font-bold pl-1 pt-2 md:pt-5">Berbagi Kebahagiaan Bersama Brand ...</h1>
-                                <h2 class="text-white text-xs sm:text-sm md:text-xl lg:text-2xl font-bold pl-1 pt-2 md:pt-5">14 Agustus 2023</h2>
+                                <h1 class="text-white text-xs sm:text-sm md:text-xl lg:text-2xl font-bold pl-1 pt-2 md:pt-5">{{ filterProgramTitle(Program[0]['title']) }}</h1>
+                                <h2 class="text-white text-xs sm:text-sm md:text-xl lg:text-2xl font-bold pl-1 pt-2 md:pt-5">{{ formateDateProgram(Program[0]['created_at']) }}</h2>
                             </div>
                         </div>
                     </div>
@@ -65,8 +65,8 @@ export default {
                     <div class="group absolute rounded-lg hover:bg-opacity-25 hover:bg-gray-900 w-full h-full top-0 transition-all duration-300 ease-in-out">
                         <div class="absolute rounded-b-lg bottom-0 bg-opacity-95 bg-green-900 w-full h-[15%] transition-all duration-300 ease-in-out">
                             <div class="grid grid-flow-col justify-stretch md:-ml-4 md:mr-4">
-                                <h1 class="text-white text-xs sm:text-sm md:text-xs lg:text-md font-bold pl-1 pt-2 lg:pt-3">Berbagi Kebahagiaan Bersama Brand ...</h1>
-                                <h2 class="text-white text-xs sm:text-sm md:text-xs lg:text-md font-bold pl-1 pt-2 lg:pt-3">14 Agustus 2023</h2>
+                                <h1 class="text-white text-xs sm:text-sm md:text-xs lg:text-md font-bold pl-1 pt-2 lg:pt-3">{{ filterProgramTitle(Program[1]['title']) }}</h1>
+                                <h2 class="text-white text-xs sm:text-sm md:text-xs lg:text-md font-bold pl-1 pt-2 lg:pt-3">{{ formateDateProgram(Program[1]['created_at']) }}</h2>
                             </div>
                         </div>
                     </div>
@@ -76,8 +76,8 @@ export default {
                     <div class="group absolute rounded-lg hover:bg-opacity-25 hover:bg-gray-900 w-full h-full top-0 transition-all duration-300 ease-in-out">
                         <div class="absolute rounded-b-lg bottom-0 bg-opacity-95 bg-green-900 w-full h-[15%] transition-all duration-300 ease-in-out">
                             <div class="grid grid-flow-col justify-stretch md:-ml-4 md:mr-4">
-                                <h1 class="text-white text-xs sm:text-sm md:text-xs lg:text-md font-bold pl-1 pt-2 lg:pt-3">Berbagi Kebahagiaan Bersama Brand ...</h1>
-                                <h2 class="text-white text-xs sm:text-sm md:text-xs lg:text-md font-bold pl-1 pt-2 lg:pt-3">14 Agustus 2023</h2>
+                                <h1 class="text-white text-xs sm:text-sm md:text-xs lg:text-md font-bold pl-1 pt-2 lg:pt-3">{{ filterProgramTitle(Program[2]['title']) }}</h1>
+                                <h2 class="text-white text-xs sm:text-sm md:text-xs lg:text-md font-bold pl-1 pt-2 lg:pt-3">{{ formateDateProgram(Program[2]['created_at']) }}</h2>
                             </div>
                         </div>
                     </div>

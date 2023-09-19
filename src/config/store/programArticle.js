@@ -100,6 +100,16 @@ const storeProgramArticle = {
                 })
             })
         },
+        AReadProgramGuest({ commit }, slug) {
+            return new Promise((resolve, reject) => {
+                axios.get('v1/guest/readProgram/' + slug).then((res) => {
+                    commit('setAReadProgram', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
     }
 };
 
