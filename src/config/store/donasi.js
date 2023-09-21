@@ -88,7 +88,30 @@ const users = {
                     reject(err)
                 })
             })
-        }
+        },
+
+        // Guest Landing Page
+        ARetrieveDonasiGuest({ commit }) {
+            return new Promise((resolve, reject) => {
+                axios.get('v1/guest/retrieveDonasiArticle').then((res) => {
+                    commit('setARetrieveDonasi', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
+
+        AReadDonasiGuest({ commit }, slug) {
+            return new Promise((resolve, reject) => {
+                axios.get('v1/guest/readDonasi/' + slug).then((res) => {
+                    commit('setAReadDonasi', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
     }
 };
 
