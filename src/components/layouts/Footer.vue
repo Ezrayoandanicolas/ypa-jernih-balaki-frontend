@@ -1,5 +1,6 @@
 <script>
 import moment from "moment";
+import VueLoadImage from 'vue-load-image'
 export default {
     name: 'Footer-Page',
     methods: {
@@ -7,7 +8,10 @@ export default {
             const d = new Date();
             return moment(d).year()
         }
-    }
+    },
+    components: {
+        VueLoadImage
+    },
 }
 </script>
 
@@ -18,7 +22,15 @@ export default {
                 <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0 xl:w-[60%]">
                     <a href="https://flowbite.com/" class="flex items-center mb-4">
-                        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
+                        <vue-load-image>
+                            <template v-slot:image>
+                                <img src="@/assets/logo/logo-ypa-jernih-balaki.png" class="relative h-8 mr-3"/>
+                            </template>
+                            <template v-slot:preloader> 
+                                <img src="@/assets/loading/loading-image.gif" class="relative h-8 mr-3" />
+                            </template>
+                            <template v-slot:error>Image load fails</template>
+                        </vue-load-image>
                         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Maps YPA Jernih Balaki</span>
                     </a>
                     <iframe class="w-full h-full lg:h-[400px]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1024.6435675926898!2d98.69790236421449!3d3.611298838887638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30313184bca144b1%3A0xd25b5223e79ec5bb!2sJl.%20Suluh%20No.48%2C%20Sidorejo%20Hilir%2C%20Kec.%20Medan%20Tembung%2C%20Kota%20Medan%2C%20Sumatera%20Utara%2020222!5e0!3m2!1sid!2sid!4v1691833370672!5m2!1sid!2sid" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -28,16 +40,16 @@ export default {
                         <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
                         <ul class="text-gray-500 dark:text-gray-400 font-medium">
                             <li class="mb-4">
-                                <a href="#" class="hover:underline">Artikel</a>
+                                <a href="/article" class="hover:underline">Artikel</a>
                             </li>
                             <li class="mb-4">
-                                <a href="#" class="hover:underline">Program</a>
+                                <a href="/program" class="hover:underline">Program</a>
                             </li>
                             <li class="mb-4">
                                 <a href="#" class="hover:underline">Fasilitas</a>
                             </li>
                             <li class="mb-4">
-                                <a href="#" class="hover:underline">Donasi</a>
+                                <a href="/donasi" class="hover:underline">Donasi</a>
                             </li>
                         </ul>
                     </div>
@@ -67,7 +79,7 @@ export default {
             </div>
             <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
             <div class="sm:flex sm:items-center sm:justify-between">
-                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© {{ getYearFooter() }} <a href="/" class="hover:underline">Yayasan Panti Asuhan Jernih Balaki</a>. All Rights Reserved.
+                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© {{ getYearFooter() }} <a href="/" class="hover:underline">Yayasan Panti Asuhan Jernih Balaki</a>. All Rights Reserved. Developed By Ostars.
                 </span>
                 <div class="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
                     <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">

@@ -1,6 +1,6 @@
 <script>
 import moment from "moment";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
     name: 'Program-List',
     data() {
@@ -24,9 +24,9 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({
-            Program: 'getAReadProgram',
-        })
+        // ...mapGetters({
+        //     Program: 'getAReadProgram',
+        // })
     },
     methods: {
         ...mapActions({

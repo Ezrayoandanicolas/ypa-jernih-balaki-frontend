@@ -1,6 +1,7 @@
 <script>
     import { computed } from 'vue'
     import { mapGetters, useStore } from 'vuex'
+    import VueLoadImage from 'vue-load-image'
     // import { AcademicCapIcon } from '@heroicons/vue/24/solid'
     import { HomeIcon, PhotoIcon, UsersIcon, WrenchIcon, ArrowLeftCircleIcon, NewspaperIcon, SquaresPlusIcon, HeartIcon } from '@heroicons/vue/24/solid'
     export default {
@@ -45,8 +46,8 @@
                 User: 'user',
             })
         },
-        methods: {
-            // 
+        components: {
+            VueLoadImage
         },
     }
 </script>
@@ -64,8 +65,16 @@
                         </svg>
                     </button>
                     <a href="/" class="flex ml-2 md:mr-24">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
-                    <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">Flowbite</span>
+                        <vue-load-image>
+                            <template v-slot:image>
+                                <img src="@/assets/logo/logo-ypa-jernih-balaki.png" class="relative h-8 mr-3"/>
+                            </template>
+                            <template v-slot:preloader> 
+                                <img src="@/assets/loading/loading-image.gif" class="relative h-8 mr-3" />
+                            </template>
+                            <template v-slot:error>Image load fails</template>
+                        </vue-load-image>
+                    <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">YPA Jernih Balaki</span>
                     </a>
                 </div>
                 <div class="flex items-center">
@@ -106,7 +115,7 @@
             </div>
         </nav>
 
-        <aside id="logo-sidebar" class="fixed top-12 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+        <aside id="logo-sidebar" class="fixed top-14 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
             <div class="h-full px-3 py-4 overflow-y-auto bg-red-500 border-red-700">
                 <ul class="space-y-2 font-medium">
                     <li v-for="(items, index) in links" :key="index">
