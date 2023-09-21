@@ -94,16 +94,16 @@ export default {
                 :key="index"
                 class="max-w-sm h-[85%] bg-gray-100 border border-gray-200 rounded-lg shado shadow-lg"
             >
-                <a href="#">
+                <a :href="'program/read/'+item.slug">
                     <img class="rounded-t-lg h-1/2 object-cover w-full aspect-square hover:scale-100 duration-300 ease-in-out" :src="item.images.imageUrl" :alt="item.title" />
                 </a>
-                <div class="p-2">
+                <div :href="'program/read/'+item.slug">
                     <a href="#">
                         <h5 class="mb-2 text-left text-2xl font-bold tracking-tight text-gray-900">{{ filterProgramTitle(item.title) }}</h5>
                     </a>
                     <p class="font-bold text-gray-900 dark:text-gray-900 text-left mt-[-7px]">{{ formateDateProgram(item.date) }}</p>
                     <p class="font-normal text-gray-700 dark:text-gray-400 text-left" v-html="filterProgramDescription(item.article)"></p>
-                    <a href="#" class="inline-flex float-right items-center px-3 py-2 mt-4 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                    <a :href="'program/read/'+item.slug" class="inline-flex float-right items-center px-3 py-2 mt-4 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                         Read more
                         <svg class="w-3.5 h-3.5 ml-2 animate__animated animate__headShake animate__infinite animate__slow" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

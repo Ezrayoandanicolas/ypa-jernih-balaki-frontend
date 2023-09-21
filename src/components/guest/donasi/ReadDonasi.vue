@@ -1,49 +1,79 @@
 <script>
+import moment from "moment";
+import { mapActions, mapGetters } from "vuex";
 export default {
     name: 'Read-Donasi',
+    async mounted() {
+        try {
+            await this.AReadDonasiGuest(this.$route.params.donasi).then(() => {
+                this.$emit('TitleReadArticle', this.Donasi.title)
+            }).catch(() => {
+                console.log('Error Ges')
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    computed: {
+        ...mapGetters({
+            Donasi: 'getAReadDonasi',
+        })
+    },
+    methods: {
+        ...mapActions({
+            AReadDonasiGuest: 'AReadDonasiGuest',
+        }),
+        filterDonasiDescription(data) {
+            return data.substring(0, 100) + '...'
+        },
+        filterDonasiTitle(data) {
+            return data.substring(0, 40) + '...'
+        },
+        formatDateDonasi(data) {
+            return moment(data).format('LL')
+        },
+        formatCurrencyID(data) {
+            return "Rp " + data.toString().replace(/(\d)(?=(\d{3})+(?:\\.\d+)?$)/g, "$1.")
+        },
+        numberDecimal(data) {
+            return data.toFixed(0)
+        }
+    }
 }
 </script>
 
 <template>
-    <div class="read-donasi relative">
+    <div v-if="Donasi != null" class="read-donasi relative">
         <div class="container mx-auto w-full md:w-2/3">
             <div class="thumbnail m-5">
                 <div class="image-thumbnail">
-                    <img class="object-cover w-full h-[250px] md:h-[500px] shadow-md rounded-lg" src="http://127.0.0.1:8000/slide/images/foto-1.jpg" alt="thumbnail">
+                    <img class="object-cover w-full h-[250px] md:h-[500px] shadow-md rounded-lg" :src="Donasi.images.imageUrl" alt="thumbnail">
                 </div>
             </div>
             <div class="detail-article">
-                <h1 id="title-article" class="font-bold px-5 pt-5 text-2xl lg:text-4xl">Berbagi Kebahagiaan Bersama Brand Terkemuka</h1>
-                <h3 id="date-article" class="font-normal text-right px-5 pt-5 text-md lg:text-lg">12 Agustus 2023</h3>
+                <h1 id="title-article" class="font-bold px-5 pt-5 text-2xl lg:text-4xl">{{ Donasi.title }}</h1>
+                <h3 id="date-article" class="font-normal text-right px-5 pt-5 text-md lg:text-lg">{{ formatDateDonasi(Donasi.created_at) }}</h3>
             </div>
             <div class="progress-bar mt-5">
                 <div class="flex justify-between mb-1">
                     <span class="text-base font-medium text-gray-900">Target Donasi</span>
-                    <span class="text-sm font-medium text-gray-900">Rp. 20.000.000</span>
+                    <span class="text-sm font-medium text-gray-900">{{ formatCurrencyID(Donasi.target_donasi) }}</span>
                 </div>
                 <div class="w-full bg-red-200 rounded-full h-2.5 ">
-                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
+                    <div class="bg-blue-600 h-2.5 rounded-full" :style="'width: '+numberDecimal(Donasi.result_donasi/Donasi.target_donasi*100 > 100 ? 100 : Donasi.result_donasi/Donasi.target_donasi*100)+'%'"></div>
                 </div>
                 <div class="flex justify-between mb-1">
-                    <span class="text-base font-medium text-gray-900">Rp. 9.000.000 (Terkumpul)</span>
-                    <span class="text-sm font-medium text-gray-900">45%</span>
+                    <span class="text-base font-medium text-gray-900">{{ formatCurrencyID(Donasi.result_donasi) }} (Terkumpul)</span>
+                    <span class="text-sm font-medium text-gray-900">{{ numberDecimal(Donasi.result_donasi/Donasi.target_donasi*100)+'%' }}</span>
                 </div>
             </div>
             <div class="inline-flex justify-between mb-1 rounded-lg bg-red-500 text-white px-4 py-1">
                 <span class="text-sm font-medium">Batas Waktu : &nbsp;</span>
-                <span class="text-sm font-medium">12 Agustus 2023</span>
+                <span class="text-sm font-medium">{{ formatDateDonasi(Donasi.date_end) }}</span>
             </div>
             <div class="content px-5 pt-5 text-left text-md leading-7">
-                    <h3 class="font-bold text-lg">Lorem Ipsum</h3>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, tempore minus provident in ea illum ipsa eum exercitationem culpa perspiciatis modi! Maxime, aliquid harum ab quo et consequatur quibusdam sequi!.<br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatum eveniet rem autem delectus debitis amet vero quibusdam culpa, asperiores harum quisquam vitae magni sint vel nihil. Quaerat, odio nostrum?.<br/><br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit neque assumenda deserunt, labore dolores nulla reprehenderit quo molestiae libero. Odio accusamus rerum quam at incidunt. Maxime accusantium quo cupiditate quibusdam? <br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, tempore minus provident in ea illum ipsa eum exercitationem culpa perspiciatis modi! Maxime, aliquid harum ab quo et consequatur quibusdam sequi!.<br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatum eveniet rem autem delectus debitis amet vero quibusdam culpa, asperiores harum quisquam vitae magni sint vel nihil. Quaerat, odio nostrum?.<br/><br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit neque assumenda deserunt, labore dolores nulla reprehenderit quo molestiae libero. Odio accusamus rerum quam at incidunt. Maxime accusantium quo cupiditate quibusdam? <br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, tempore minus provident in ea illum ipsa eum exercitationem culpa perspiciatis modi! Maxime, aliquid harum ab quo et consequatur quibusdam sequi!.<br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptatum eveniet rem autem delectus debitis amet vero quibusdam culpa, asperiores harum quisquam vitae magni sint vel nihil. Quaerat, odio nostrum?.<br/><br/>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit neque assumenda deserunt, labore dolores nulla reprehenderit quo molestiae libero. Odio accusamus rerum quam at incidunt. Maxime accusantium quo cupiditate quibusdam?
+                    <h3 class="font-bold text-lg">{{ Donasi.title }}</h3>
+                    <p v-html="Donasi.article"></p>
             </div>
             <div class="social-media my-5 pl-5">
                 <h1 class="font-bold">Share to : </h1>

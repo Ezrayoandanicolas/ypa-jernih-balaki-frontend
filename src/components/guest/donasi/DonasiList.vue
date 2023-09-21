@@ -23,11 +23,6 @@ export default {
             console.log(err)
         }
     },
-    computed: {
-        // ...mapGetters({
-        //     Donasi: 'getARetrieveDonasi',
-        // })
-    },
     methods: {
         ...mapActions({
             ARetrieveDonasiGuest: 'ARetrieveDonasiGuest',
@@ -100,12 +95,12 @@ export default {
                 :key="index"
                 class="max-w-sm h-[85%] bg-gray-100 border border-gray-200 rounded-lg shado shadow-lg"
             >
-                <a href="#" class="relative">
+                <a :href="'donasi/read/'+item.slug" class="relative">
                     <img class="rounded-t-lg h-1/2 object-cover w-full aspect-square hover:scale-100 hover:brightness-90 duration-300 ease-in-out" :src="item.images.imageUrl" :alt="item.title" />
                     <span class="absolute rounded-lg font-bold text-sm text-white px-4 py-1 bg-red-500 top-0 right-0">{{ item.category.name }}</span>
                 </a>
                 <div class="p-2">
-                    <a href="#">
+                    <a :href="'donasi/read/'+item.slug">
                         <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">{{ item.title }}</h5>
                     </a>
                     <p class="font-semibold text-gray-900 dark:text-gray-900 text-left mt-[-7px]">{{ formateDateDonasi(item.date_start) }}</p>
@@ -127,7 +122,7 @@ export default {
                         <span class="text-sm font-medium">{{ formateDateDonasi(item.date_end) }}</span>
                     </div>
                     
-                    <a href="#" class="inline-flex float-right items-center px-3 py-2 mt-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <a :href="'donasi/read/'+item.slug" class="inline-flex float-right items-center px-3 py-2 mt-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Read more
                         <svg class="w-3.5 h-3.5 ml-2 animate__animated animate__headShake animate__infinite animate__slow" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
