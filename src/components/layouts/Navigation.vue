@@ -10,9 +10,9 @@
             const links = [
                 {'url': '/article', 'title': 'Artikel', 'auth': false},
                 {'url': '/program', 'title': 'Program Kegiatan', 'auth': false},
-                {'url': '/fasilitas', 'title': 'Fasilitas', 'auth': false},
+                // {'url': '/fasilitas', 'title': 'Fasilitas', 'auth': false},
                 {'url': '/donasi', 'title': 'Donasi', 'auth': false},
-                {'url': '/about', 'title': 'Tentang', 'auth': false},
+                // {'url': '/about', 'title': 'Tentang', 'auth': false},
             ];
             
             return { 
