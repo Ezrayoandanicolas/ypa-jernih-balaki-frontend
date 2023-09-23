@@ -197,7 +197,7 @@ export default {
         </div>
 
         <div class="grid max-md:grid-cols-5 grid-cols-5 gap-2 mt-4">
-            <div v-for="(items, index) in Slide" :key="index" class="h-24 w-full">
+            <div v-for="(items, index) in Slide" :key="index" class="h-48 w-full">
                 <img @click="destroySlide(items)" class="h-full w-full rounded-lg" :src="items.value" alt="">
             </div>
         </div>
