@@ -18,6 +18,7 @@ import MasterCarousel from './components/admin/carousel/MasterCarousel.vue'
 import AdminMasterArticle from './components/admin/article/MasterArticle.vue'
 import AdminMasterProgram from './components/admin/program/MasterProgram.vue'
 import AdminMasterDonasi from './components/admin/donasi/MasterDonasi.vue'
+import AdminMasterForm from './components/admin/form/MasterForm.vue'
 
 // createApp.use(VueRouter);
 
@@ -330,6 +331,19 @@ const routes = [
       component: AdminMasterDonasi,
       meta: {
         title: 'Update Program | YPA Jernih Balaki',
+        middleware: true,
+        navigation: 'auth',
+        enterAnimate : 'animate__animated animate__fadeIn animate__faster',
+        leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
+      }
+    },
+    // Admin
+    {
+      path: '/admin/form',
+      name: 'FormDonasiPage',
+      component: AdminMasterForm,
+      meta: {
+        title: 'Form Donasi | YPA Jernih Balaki',
         middleware: true,
         navigation: 'auth',
         enterAnimate : 'animate__animated animate__fadeIn animate__faster',

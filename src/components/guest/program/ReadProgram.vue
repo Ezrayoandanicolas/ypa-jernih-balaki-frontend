@@ -32,7 +32,7 @@ export default {
 </script>
 
 <template>
-    <div v-if="Program != null" class="read-programs relative">
+    <div v-if="Program != null" class="read-programs relative max-sm:px-5">
         <div class="container mx-auto w-full md:w-2/3">
             <div class="thumbnail m-5">
                 <div class="image-thumbnail">

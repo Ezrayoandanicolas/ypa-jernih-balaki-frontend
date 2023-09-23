@@ -48,8 +48,8 @@ export default {
 </script>
 
 <template>
-    <div class="donase-page">
-        <h1 class="pt-[120px] pb-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 underline underline-offset-8 decoration-red-700">
+    <div class="donase-page pb-5">
+        <h1 class="max-sm:pt-5 max-sm:text-3xl pt-[54px] pb-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 underline underline-offset-8 decoration-red-700">
             Donasi
         </h1>
         <div v-if="Donasi.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 pt-8 px-10 container justify-items-center m-auto">
@@ -64,7 +64,7 @@ export default {
                 </a>
                 <div class="p-2">
                     <a :href="'donasi/read/'+item.slug">
-                        <h5 class="mb-2 text-1xl font-bold tracking-tight text-gray-900">{{ item.title }}</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ item.title }}</h5>
                     </a>
                     <p class="font-semibold text-gray-900 dark:text-gray-900 text-left mt-[-7px]">{{ formateDateDonasi(item.date_start) }}</p>
                     <div class="progress-bar">

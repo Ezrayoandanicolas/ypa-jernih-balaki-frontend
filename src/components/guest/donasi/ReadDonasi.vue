@@ -43,7 +43,7 @@ export default {
 </script>
 
 <template>
-    <div v-if="Donasi != null" class="read-donasi relative">
+    <div v-if="Donasi != null" class="read-donasi relative max-sm:px-5">
         <div class="container mx-auto w-full md:w-2/3">
             <div class="thumbnail m-5">
                 <div class="image-thumbnail">

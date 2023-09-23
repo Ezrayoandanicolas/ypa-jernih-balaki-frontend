@@ -42,8 +42,8 @@ export default {
 </script>
 
 <template>
-    <div class="program-page">
-        <h1 class="pt-[120px] pb-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 underline underline-offset-8 decoration-red-700">
+    <div class="program-page bg-gray-300 pb-5">
+        <h1 class="max-sm:mx-2 max-sm:pt-5 max-sm:text-3xl pt-[54px] pb-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 underline underline-offset-8 decoration-red-700">
             Program Kegiatan Terbaru
         </h1>
         <div v-if="Program.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 pt-8 px-10 container justify-items-center m-auto">

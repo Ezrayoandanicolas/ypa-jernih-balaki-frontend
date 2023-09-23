@@ -60,7 +60,7 @@ export default {
 
 <template>
     <div class="donase-page">
-        <h1 class="pt-[120px] pb-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 underline underline-offset-8 decoration-red-700">
+        <h1 class="max-sm:pt-5 max-sm:text-3xl pt-[120px] pb-10 text-4xl font-extrabold leading-none tracking-tight text-gray-900 underline underline-offset-8 decoration-red-700">
             Fasilitas Panti Asuhan
         </h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 pt-8 px-10 container justify-items-center m-auto">

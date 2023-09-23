@@ -3,7 +3,7 @@
     import { mapGetters, useStore } from 'vuex'
     import VueLoadImage from 'vue-load-image'
     // import { AcademicCapIcon } from '@heroicons/vue/24/solid'
-    import { HomeIcon, PhotoIcon, UsersIcon, WrenchIcon, ArrowLeftCircleIcon, NewspaperIcon, SquaresPlusIcon, HeartIcon } from '@heroicons/vue/24/solid'
+    import { HomeIcon, PhotoIcon, UsersIcon, WrenchIcon, ArrowLeftCircleIcon, NewspaperIcon, SquaresPlusIcon, HeartIcon, BellAlertIcon } from '@heroicons/vue/24/solid'
     export default {
         name: 'Admin-Navigation',
         setup() {
@@ -14,6 +14,7 @@
                 {'url': '/admin/article', 'title': 'Article', 'icons' : NewspaperIcon, 'auth': true, 'multiple': false},
                 {'url': '/admin/program', 'title': 'Program', 'icons' : SquaresPlusIcon, 'auth': true, 'multiple': false},
                 {'url': '/admin/donasi', 'title': 'Donasi', 'icons' : HeartIcon, 'auth': true, 'multiple': false},
+                {'url': '/admin/form', 'title': 'Form Donasi', 'icons' : BellAlertIcon, 'auth': true, 'multiple': false},
                 // {'url': '/admin/fasilitas', 'title': 'Fasilitas', 'icons' : AcademicCapIcon, 'auth': true, 'multiple': false},
                 {'url': '#', 'title': 'Users', 'icons' : UsersIcon, 'auth': true, 'multiple': [
                     {'url': '/users/pengurus', 'title': 'Pengurus'},

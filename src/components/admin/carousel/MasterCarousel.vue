@@ -13,6 +13,7 @@ export default {
                 imageFile: '',
                 imagePreviewProcess: false,
             },
+            showModal: false,
         }
     },
     async mounted() {
@@ -125,6 +126,9 @@ export default {
                         })
                     }
                 })
+        },
+        toggleModal() {
+            this.showModal = !this.showModal
         }
     },
     components: {
@@ -141,58 +145,60 @@ export default {
                     Carousel
                 </h2>
                 <div class="button">
-                    <button data-modal-target="uploadSlide" data-modal-toggle="uploadSlide" class="rounded-lg bg-blue-500 text-white px-5 py-2">New Slide</button>
+                    <button @click="toggleModal" class="rounded-lg bg-blue-500 text-white px-5 py-2">New Slide</button>
                 </div>
             </div>
             <hr />
         </div>
         <!-- Main modal -->
-        <div id="uploadSlide" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="relative w-full max-w-2xl max-h-full">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow">
-                    <!-- Modal header -->
-                    <div class="flex items-start justify-between p-4 border-b rounded-t">
-                        <h3 class="text-xl font-semibold text-gray-900 ">
-                            Upload New Image
-                        </h3>
-                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center " data-modal-hide="uploadSlide">
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                            </svg>
-                            <span class="sr-only">Close modal</span>
-                        </button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="p-6 space-y-6">
-                        <div class="relative z-0 w-full h-full mb-6 group">
-                            <label for="cover-photo" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Slide (Upload on Select)</label>
-                            <div id="cover-photo" class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                                <div class="text-center">
-                                <PhotoIcon v-if="!uploadImage.imagePreviewUrl" class="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
-                                <!-- {{ LogoMini.imageUrl }} -->
-                                <!-- <img v-if="!uploadImage.imagePreviewUrl" class="imagePreview w-40 h-40" :src="LogoMini.imageUrl" /> -->
-                                <img v-else class="imagePreview w-full" :hidden="!uploadImage.imagePreviewProcess" :src="uploadImage.imagePreviewUrl" />
+        <div v-if="showModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="flex items-center justify-center h-screen">
+                <div class="relative w-full max-w-2xl max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow">
+                        <!-- Modal header -->
+                        <div class="flex items-start justify-between p-4 border-b rounded-t">
+                            <h3 class="text-xl font-semibold text-gray-900 ">
+                                Upload New Image
+                            </h3>
+                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center " @click="toggleModal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="p-6 space-y-6">
+                            <div class="relative z-0 w-full h-full mb-6 group">
+                                <label for="cover-photo" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Slide (Upload on Select)</label>
+                                <div id="cover-photo" class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                                    <div class="text-center">
+                                    <PhotoIcon v-if="!uploadImage.imagePreviewUrl" class="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
+                                    <!-- {{ LogoMini.imageUrl }} -->
+                                    <!-- <img v-if="!uploadImage.imagePreviewUrl" class="imagePreview w-40 h-40" :src="LogoMini.imageUrl" /> -->
+                                    <img v-else class="imagePreview w-full" :hidden="!uploadImage.imagePreviewProcess" :src="uploadImage.imagePreviewUrl" />
 
-                                    <div class="mt-4 flex justify-center text-sm leading-6 text-gray-600">
-                                        <label for="file-upload-mini" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-                                        <span>{{ uploadImage.imageFile ? "Change a Photo" : "Upload a Photo" }}</span>
-                                        <input id="file-upload-mini" name="file-upload-mini" type="file" class="sr-only" ref="fileUploadMini" @input="selectImage"/>
-                                        </label>
+                                        <div class="mt-4 flex justify-center text-sm leading-6 text-gray-600">
+                                            <label for="file-upload-mini" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                            <span>{{ uploadImage.imageFile ? "Change a Photo" : "Upload a Photo" }}</span>
+                                            <input id="file-upload-mini" name="file-upload-mini" type="file" class="sr-only" ref="fileUploadMini" @input="selectImage"/>
+                                            </label>
+                                        </div>
+                                        <p class="text-xs leading-5 text-gray-600">PNG, JPG Max 2MB</p>
                                     </div>
-                                    <p class="text-xs leading-5 text-gray-600">PNG, JPG Max 2MB</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-            <div v-for="(items, index) in Slide" :key="index">
-                <img @click="destroySlide(items)" class="h-auto max-w-full rounded-lg" :src="items.value" alt="">
+        <div class="grid max-md:grid-cols-5 grid-cols-5 gap-2 mt-4">
+            <div v-for="(items, index) in Slide" :key="index" class="h-24 w-full">
+                <img @click="destroySlide(items)" class="h-full w-full rounded-lg" :src="items.value" alt="">
             </div>
         </div>
     </div>
