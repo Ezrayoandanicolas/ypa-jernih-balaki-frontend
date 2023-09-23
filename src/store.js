@@ -10,6 +10,7 @@ import DonasiArticle from '@/config/store/donasi.js'
 import Images from '@/config/store/images.js'
 import Settings from '@/config/store/setting.js'
 import LogDonasi from '@/config/store/logDonasi'
+import PaymentBank from '@/config/store/paymentBank'
 
 const store = createStore({
     modules: {
@@ -22,7 +23,8 @@ const store = createStore({
         Category,
         Images,
         Settings,
-        LogDonasi
+        LogDonasi,
+        PaymentBank
     }
 })
 

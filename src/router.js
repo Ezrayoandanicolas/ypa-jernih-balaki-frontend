@@ -19,6 +19,7 @@ import AdminMasterArticle from './components/admin/article/MasterArticle.vue'
 import AdminMasterProgram from './components/admin/program/MasterProgram.vue'
 import AdminMasterDonasi from './components/admin/donasi/MasterDonasi.vue'
 import AdminMasterForm from './components/admin/form/MasterForm.vue'
+import AdminMasterPayment from './components/admin/payment/MasterPayment.vue'
 
 // createApp.use(VueRouter);
 
@@ -337,13 +338,26 @@ const routes = [
         leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
       }
     },
-    // Admin
+    // Admin Form
     {
       path: '/admin/form',
       name: 'FormDonasiPage',
       component: AdminMasterForm,
       meta: {
         title: 'Form Donasi | YPA Jernih Balaki',
+        middleware: true,
+        navigation: 'auth',
+        enterAnimate : 'animate__animated animate__fadeIn animate__faster',
+        leaveAnimate : 'animate__animated animate__fadeOut animate__faster',
+      }
+    },
+    // Admin Payment
+    {
+      path: '/admin/payment',
+      name: 'PaymentPage',
+      component: AdminMasterPayment,
+      meta: {
+        title: 'Payment | YPA Jernih Balaki',
         middleware: true,
         navigation: 'auth',
         enterAnimate : 'animate__animated animate__fadeIn animate__faster',

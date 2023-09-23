@@ -1,14 +1,37 @@
 <script>
 import moment from "moment";
 import { mapActions, mapGetters } from "vuex";
+import { Tab, initTE, } from "tw-elements";
+
+initTE({ Tab });
+
 export default {
     name: 'Read-Donasi',
+    data() {
+        return {
+            showModal: false,
+            openTab: 0,
+            form: {
+                name: '',
+                nominal: '',
+                donasi_article_id: '',
+                payment_id: '',
+            }
+        }
+    },
     async mounted() {
         try {
             await this.AReadDonasiGuest(this.$route.params.donasi).then(() => {
                 this.$emit('TitleReadArticle', this.Donasi.title)
+                this.form.donasi_article_id = this.Donasi.id
             }).catch(() => {
                 console.log('Error Ges')
+            })
+
+            await this.retrievePaymentBank(this.$route.params.donasi).then(() => {
+                console.log('Success Retrieve PaymentBank')
+            }).catch(() => {
+                console.log('Error Get PaymentBank')
             })
         } catch (err) {
             console.log(err)
@@ -17,11 +40,13 @@ export default {
     computed: {
         ...mapGetters({
             Donasi: 'getAReadDonasi',
+            PaymentBank : 'getPaymentBank',
         })
     },
     methods: {
         ...mapActions({
             AReadDonasiGuest: 'AReadDonasiGuest',
+            retrievePaymentBank: 'retrievePaymentBank',
         }),
         filterDonasiDescription(data) {
             return data.substring(0, 100) + '...'
@@ -37,6 +62,36 @@ export default {
         },
         numberDecimal(data) {
             return data.toFixed(0)
+        },
+        toggleModal() {
+            this.showModal = !this.showModal
+        },
+        toggleTabs(tabNumber){
+            this.openTab = tabNumber
+        },
+        storeForm() {
+            this.$store.dispatch('storeLogDonasiGuest', this.form).then(() => {
+                this.$swal.fire({
+                        text: 'Berhasil Buat Form!',
+                        icon: 'success',
+                        position: 'bottom-right',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                
+                    this.showModal = !this.showModal
+                    // this.form.name = ''
+                    // this.form.nominal = ''
+                    // this.form.payment_id = ''
+            }).catch(() => {
+                this.$swal.fire({
+                        text: 'Gagal Buat Form!',
+                        icon: 'Error',
+                        position: 'bottom-right',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+            })
         }
     }
 }
@@ -52,7 +107,10 @@ export default {
             </div>
             <div class="detail-article">
                 <h1 id="title-article" class="font-bold px-5 pt-5 text-2xl lg:text-4xl">{{ Donasi.title }}</h1>
-                <h3 id="date-article" class="font-normal text-right px-5 pt-5 text-md lg:text-lg">{{ formatDateDonasi(Donasi.created_at) }}</h3>
+                <div class="flex justify-between items-center">
+                    <button @click="toggleModal" class="bg-blue-500 rounded-lg text-white px-4 py-2">Donasi</button>
+                    <h3 id="date-article" class="font-normal px-5 pt-5 text-md lg:text-lg">{{ formatDateDonasi(Donasi.created_at) }}</h3>
+                </div>
             </div>
             <div class="progress-bar mt-5">
                 <div class="flex justify-between mb-1">
@@ -109,6 +167,107 @@ export default {
                         <span class="sr-only">Dribbble account</span>
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main modal -->
+    <div v-if="showModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed backdrop-blur-sm top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="flex items-center justify-center h-screen">
+            <div class="relative w-full max-w-2xl max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow">
+                    <!-- Modal header -->
+                    <div class="flex items-start justify-between p-4 border-b rounded-t">
+                        <h3 class="text-xl font-semibold text-gray-900 ">
+                            Form Donasi
+                        </h3>
+                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center " @click="toggleModal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6 space-y-6">
+                        <form class="w-full max-w-lg m-auto">
+                            <div class="flex flex-wrap -mx-3 mb-3">
+                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="form-name">
+                                        Masukkan Nama / Anonim
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="form-name" type="text" v-model="form.name" placeholder="Jane">
+                                    <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+                                    </div>
+                                    <div class="w-full md:w-1/2 px-3">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="nominal">
+                                        Nominal
+                                    </label>
+                                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nominal" type="number" v-model="form.nominal" :placeholder="formatCurrencyID(20000)">
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap -mx-3 mb-2">
+                                    
+                                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="payment-bank">
+                                            Pilih BANK
+                                        </label>
+                                        <div class="relative">
+                                            <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="payment-bank" v-model="form.payment_id">
+                                                <option v-for="(items, index) in PaymentBank" v-on:click="toggleTabs(index)" :key="index" :value="items.id">{{ items.bank }}</option>
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        
+                        <div class="flex flex-wrap">
+                            <div class="w-full">
+                                <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+                                    <li v-for="(item, index) in PaymentBank" :key="index" class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal" v-on:click="toggleTabs(index)" v-bind:class="{'text-pink-600 bg-white': openTab !== index, 'text-white bg-pink-600': openTab === index}">
+                                        {{ item.bank }}
+                                    </a>
+                                    </li>
+                                </ul>
+                                <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                                    <div class="px-4 py-5 flex-auto">
+                                        <div class="tab-content tab-space">
+                                            <div v-for="(item, index) in PaymentBank" :key="index" v-bind:class="{'hidden': openTab !== index, 'block': openTab === index}">
+                                                <h1 class="font-bold text-2xl">Cara Pembayaran</h1>
+                                                <p class="text-left">
+                                                    * Login M-Banking/Internet Banking/ATM <br/>
+                                                    * Masukkan Nomor Rekening Tujuan <br/>
+                                                    <span class="font-bold ml-4">
+                                                        Account Name : {{ item.name }} <br/>
+                                                    </span>
+                                                    <span class="font-bold ml-4">
+                                                        Account Bank : {{ item.bank }} <br/>
+                                                    </span>
+                                                    <span class="font-bold ml-4">
+                                                        Account Number : {{ item.card_number }} <br/>
+                                                    </span>
+                                                    * Masukkan Nominal yang ingin di Donasikan <br/>
+                                                    * Pastikan kembali Nomor Rekening & Nama Tujuan Donasi <br/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full text-right">
+                            <button @click="storeForm" class="ml-auto text-white bg-blue-500 px-4 py-2 rounded-lg">Donasi</button>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

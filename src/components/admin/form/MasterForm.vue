@@ -98,10 +98,14 @@ export default {
                                         </th>
 
                                         <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                            Bank
+                                        </th>
+
+                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                             Nominal
                                         </th>
 
-                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Category</th>
+                                        <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Article Donasi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
@@ -124,6 +128,12 @@ export default {
                                                 {{ item.name }}
                                             </div>
                                         </td>
+                                        <td class="px-4 py-4 text-sm whitespace-nowrap">
+                                            <div>
+                                                <h4 class="text-white">{{ item.payment.bank }}</h4>
+                                            </div>
+                                        </td>
+
                                         <td class="px-4 py-4 text-sm whitespace-nowrap">
                                             <div>
                                                 <h4 class="text-white">{{ formatCurrencyID(item.nominal) }}</h4>

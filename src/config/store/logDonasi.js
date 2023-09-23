@@ -29,6 +29,26 @@ const logDonasi = {
                 })
             })
         },
+        storeLogDonasiGuest({commit}, data) {
+            return new Promise((resolve, reject) => {
+                axios.post('v1/guest/storeLogDonasiGuest', data).then((res) => {
+                    commit('setFormDonasi', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
+        storeLogDonasi({commit}, data) {
+            return new Promise((resolve, reject) => {
+                axios.post('v1/admin/storeLogDonasi', data).then((res) => {
+                    commit('setFormDonasi', res.data)
+                    resolve(res.data)
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
         updateLogDonasi({commit}, data) {
             return new Promise((resolve, reject) => {
                 axios.post('v1/admin/updateLogDonasi/'+data.id, data).then((res) => {

@@ -9,11 +9,13 @@ module.exports = {
     extend: {},
   },
   content: [
-    "./node_modules/flowbite/**/*.js"
+    "./node_modules/flowbite/**/*.js",
+    "./node_modules/tw-elements/dist/js/**/*.js"
   ],
   plugins: [
     require('flowbite/plugin')({
       charts: true,
-    })
+    }),
+    require("tw-elements/dist/plugin.cjs")
   ],
 }
