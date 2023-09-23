@@ -2,8 +2,8 @@
     import { computed } from 'vue'
     import { mapGetters, useStore } from 'vuex'
     import VueLoadImage from 'vue-load-image'
-    // import { AcademicCapIcon } from '@heroicons/vue/24/solid'
-    import { HomeIcon, PhotoIcon, UsersIcon, WrenchIcon, ArrowLeftCircleIcon, NewspaperIcon, SquaresPlusIcon, HeartIcon, BellAlertIcon, CreditCardIcon } from '@heroicons/vue/24/solid'
+    // import { AcademicCapIcon, UsersIcon, WrenchIcon } from '@heroicons/vue/24/solid'
+    import { HomeIcon, PhotoIcon, ArrowLeftCircleIcon, NewspaperIcon, SquaresPlusIcon, HeartIcon, BellAlertIcon, CreditCardIcon } from '@heroicons/vue/24/solid'
     export default {
         name: 'Admin-Navigation',
         setup() {
@@ -17,16 +17,16 @@
                 {'url': '/admin/form', 'title': 'Form Donasi', 'icons' : BellAlertIcon, 'auth': true, 'multiple': false},
                 {'url': '/admin/payment', 'title': 'Payment', 'icons' : CreditCardIcon, 'auth': true, 'multiple': false},
                 // {'url': '/admin/fasilitas', 'title': 'Fasilitas', 'icons' : AcademicCapIcon, 'auth': true, 'multiple': false},
-                {'url': '#', 'title': 'Users', 'icons' : UsersIcon, 'auth': true, 'multiple': [
-                    {'url': '/users/pengurus', 'title': 'Pengurus'},
-                    {'url': '/users/owner', 'title': 'Owner'},
-                ]},
-                {'url': '#', 'title': 'Settings', 'icons' : WrenchIcon, 'auth': true, 'multiple': [
-                    {'url': '/settings/logo', 'title': 'Logo'},
-                    {'url': '/settings/navigation', 'title': 'Navigation (Soon)'},
-                    {'url': '/settings/menus', 'title': 'Menus'},
-                    {'url': '/settings/background', 'title': 'Background (Soon)'},
-                ]},
+                // {'url': '#', 'title': 'Users', 'icons' : UsersIcon, 'auth': true, 'multiple': [
+                //     {'url': '/users/pengurus', 'title': 'Pengurus'},
+                //     {'url': '/users/owner', 'title': 'Owner'},
+                // ]},
+                // {'url': '#', 'title': 'Settings', 'icons' : WrenchIcon, 'auth': true, 'multiple': [
+                //     {'url': '/settings/logo', 'title': 'Logo'},
+                //     {'url': '/settings/navigation', 'title': 'Navigation (Soon)'},
+                //     {'url': '/settings/menus', 'title': 'Menus'},
+                //     {'url': '/settings/background', 'title': 'Background (Soon)'},
+                // ]},
                 {'url': '/logout', 'title': 'Sign Out', 'icons' : ArrowLeftCircleIcon, 'auth': true, 'multiple': false}
             ]
 

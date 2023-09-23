@@ -113,8 +113,8 @@ export default {
                                         <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                             <div v-if="item.confirm == false || item.confirm == null" class="flex items-center justify-center">
                                                 <button @click="updateForm(item)" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Confirmation</button>
-                                                <button class="bg-red-500 text-white px-4 py-2 rounded-lg ml-2">Reject</button>
-                                                <button class="bg-green-500 text-white px-4 py-2 rounded-lg ml-2">View Bukti</button>
+                                                <!-- <button class="bg-red-500 text-white px-4 py-2 rounded-lg ml-2">Reject</button>
+                                                <button class="bg-green-500 text-white px-4 py-2 rounded-lg ml-2">View Bukti</button> -->
                                             </div>
                                             <div v-else class="flex items-center justify-center">
                                                 <button disabled class="bg-blue-500 text-white px-4 py-2 rounded-lg">Sudah Verifikasi</button>
